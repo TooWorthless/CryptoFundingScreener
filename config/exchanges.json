@@ -1,0 +1,57 @@
+[   
+    {
+        "title": "okx",
+        "coins_link": "https://www.okx.com/api/v5/public/instruments",
+        "funding_link": "https://www.okx.com/api/v5/public/funding-rate"
+    },
+    {
+        "title": "xt",
+        "coins_link": "https://fapi.xt.com/future/market/v3/public/symbol/list",
+        "funding_link": "https://fapi.xt.com/future/market/v1/public/q/funding-rate"
+    },
+    {
+        "title": "binance",
+        "coins_link": "https://fapi.binance.com/fapi/v1/exchangeInfo",
+        "funding_link": "https://fapi.binance.com/fapi/v1/premiumIndex"
+    },
+    {
+        "title": "mexc",
+        "coins_link": "https://contract.mexc.com/api/v1/contract/funding_rate",
+        "funding_link": "https://contract.mexc.com/api/v1/contract/funding_rate"
+    },
+    {
+        "title": "bybit",
+        "coins_link": "https://api.bybit.com/v5/market/tickers",
+        "funding_link": "https://api.bybit.com/v5/market/tickers"
+    },
+    {
+        "title": "bingx",
+        "coins_link": "https://open-api.bingx.com/openApi/swap/v2/quote/premiumIndex",
+        "funding_link": "https://open-api.bingx.com/openApi/swap/v2/quote/premiumIndex"
+    },
+    {
+        "title": "bitget",
+        "coins_link": "https://api.bitget.com/api/v2/mix/market/tickers",
+        "funding_link": "https://api.bitget.com/api/v2/mix/market/tickers"
+    },
+    {
+        "title": "gate",
+        "coins_link": "https://api.gateio.ws/api/v4/futures/usdt/contracts",
+        "funding_link": "https://api.gateio.ws/api/v4/futures/usdt/contracts"
+    },
+    {
+        "title": "htx",
+        "coins_link": "https://api.hbdm.com/linear-swap-api/v1/swap_batch_funding_rate",
+        "funding_link": "https://api.hbdm.com/linear-swap-api/v1/swap_batch_funding_rate"
+    },
+    {
+        "title": "bitmart",
+        "coins_link": "https://api-cloud.bitmart.com/contract/public/details",
+        "funding_link": "https://api-cloud.bitmart.com/contract/public/details"
+    },
+    {
+        "title": "kukoin)",
+        "coins_link": "https://api-futures.kucoin.com/api/v1/contracts/active",
+        "funding_link": "https://api-futures.kucoin.com/api/v1/contracts/active"
+    }
+]

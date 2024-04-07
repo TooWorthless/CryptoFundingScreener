@@ -1,0 +1,86 @@
+
+<main>
+    <div>
+        <h1 class="exchange-title"><a id="header-logo-link" href="/">AVV</a></h1>
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                {{#each exchanges}}
+                    <th><a href="http://localhost:80/?exchange={{title}}&sort={{sortType}}">{{title}}</a></th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        <tbody id="fundings_table">
+        </tbody>
+
+    </table>
+</main>
+
+
+
+
+
+
+
+<script src="./utils.js"></script>
+
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const exchangeTitle = urlParams.get('exchange');
+    const sortType = urlParams.get('sort');
+
+    console.log('urlParams.get(\'exchange\') :>> ', urlParams.get('exchange'));
+    console.log('urlParams.get(\'sort\') :>> ', urlParams.get('sort'));
+
+    const socket = new WebSocket('ws://localhost:{{port}}');
+
+    socket.onopen = function(event) {
+        console.log('Connection established');
+        const {
+            pathname, search
+        } = window.location;
+
+        socket.send(`connect|${urlParams.get('exchange')}|${urlParams.get('sort')}`);
+    };
+
+    socket.onmessage = function(event) {
+        let updatedFundingsData = JSON.parse(event.data);
+
+        if(exchangeTitle && sortType) {
+            updatedFundingsData = sortDataByFunding(updatedFundingsData, exchangeTitle, sortType);
+        }
+        let updatedTable = '';
+
+        for(const symbol of updatedFundingsData) {
+            updatedTable += `<tr>\n<td>${symbol.title}</td>\n`;
+            for(const exchange of symbol.exchanges) {
+                updatedTable += `<td>${exchange.funding}</td>\n`;
+            }
+            updatedTable += `</tr>\n`;
+        }
+
+        const table = document.getElementById('fundings_table');
+        table.innerHTML = updatedTable;
+    };
+
+    socket.onclose = function(event) {
+        console.log('Connection closed');
+    };
+
+    
+
+    function sendMessage() {
+        const messageInput = document.getElementById('messageInput');
+        const message = messageInput.value;
+        socket.send(message);
+        messageInput.value = '';
+    }
+
+</script>
