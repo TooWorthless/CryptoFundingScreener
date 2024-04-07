@@ -7,11 +7,18 @@ import { fundingsParser } from './parser/fundingsParser.js';
 import { createWSS } from './wss/wss.js';
 // import { startParsing, getCurrentData } from './parsing.js';
 import { utils } from './utils.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 const app = express();
 const server = createServer(app);
 createWSS(server);
+
+
+const IP = process.env.IP;
+const PORT = process.env.PORT;
+
 
 fundingsParser.start();
 
@@ -52,19 +59,24 @@ app.get('/', async (req, res) => {
 
                 exchangesDatasList.push({
                     title: exchange.title,
-                    sortType: nextSortType
+                    sortType: nextSortType,
+                    ip: IP,
+                    port: PORT
                 });
             }
             else {
                 exchangesDatasList.push({
                     title: exchange.title,
-                    sortType: 'up'
+                    sortType: 'up',
+                    ip: IP,
+                    port: PORT
                 });
             }
         }
 
         res.render('home', {
-            port: 80,
+            ip: IP,
+            port: PORT,
             exchanges: exchangesDatasList
         });
     } catch (error) {
@@ -74,6 +86,6 @@ app.get('/', async (req, res) => {
 
 
 
-server.listen(80, () => {
+server.listen(PORT, () => {
     console.log('Express JS Service started!');
 });

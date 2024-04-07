@@ -10,7 +10,7 @@
             <tr>
                 <th>Symbol</th>
                 {{#each exchanges}}
-                    <th><a href="http://localhost:80/?exchange={{title}}&sort={{sortType}}">{{title}}</a></th>
+                    <th><a href="http://{{ip}}:{{port}}/?exchange={{title}}&sort={{sortType}}">{{title}}</a></th>
                 {{/each}}
             </tr>
         </thead>
@@ -39,7 +39,7 @@
     console.log('urlParams.get(\'exchange\') :>> ', urlParams.get('exchange'));
     console.log('urlParams.get(\'sort\') :>> ', urlParams.get('sort'));
 
-    const socket = new WebSocket('ws://localhost:{{port}}');
+    const socket = new WebSocket('ws://{{ip}}:{{port}}');
 
     socket.onopen = function(event) {
         console.log('Connection established');
