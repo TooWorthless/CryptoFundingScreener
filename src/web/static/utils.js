@@ -8,7 +8,7 @@ function sortDataByFunding (symbolsData, exchangeTitle, sortType) {
 
 
             let previousExchangeFunding;
-            for(let symbolDataIndex = 0; symbolDataIndex < symbolsData.length-1; symbolDataIndex++) {
+            for(let symbolDataIndex = 0; symbolDataIndex < symbolsData.length; symbolDataIndex++) {
                 for(const exchange of symbolsData[symbolDataIndex].exchanges) {
                     if(exchange.title === exchangeTitle) {
                         if(previousExchangeFunding !== undefined && previousExchangeFunding > +exchange.funding) {
@@ -28,11 +28,13 @@ function sortDataByFunding (symbolsData, exchangeTitle, sortType) {
     }
     else if(sortType === 'down') {
         for(const sd of symbolsData) {
+
+            
             let previousExchangeFunding;
-            for(let symbolDataIndex = 0; symbolDataIndex < symbolsData.length-1; symbolDataIndex++) {
+            for(let symbolDataIndex = 0; symbolDataIndex < symbolsData.length; symbolDataIndex++) {
                 for(const exchange of symbolsData[symbolDataIndex].exchanges) {
                     if(exchange.title === exchangeTitle) {
-                        if(previousExchangeFunding && previousExchangeFunding < +exchange.funding) {
+                        if(previousExchangeFunding !== undefined && previousExchangeFunding < +exchange.funding) {
                             const temp = symbolsData[symbolDataIndex];
                             symbolsData[symbolDataIndex] = symbolsData[symbolDataIndex-1];
                             symbolsData[symbolDataIndex-1] = temp;
@@ -41,6 +43,7 @@ function sortDataByFunding (symbolsData, exchangeTitle, sortType) {
                         else {
                             previousExchangeFunding = +exchange.funding;
                         }
+                        console.log('previousExchangeFunding :>> ', previousExchangeFunding);
                         break;
                     }
                 }

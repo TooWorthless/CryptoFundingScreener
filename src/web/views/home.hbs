@@ -53,6 +53,8 @@
     socket.onmessage = function(event) {
         let updatedFundingsData = JSON.parse(event.data);
 
+        console.log("event.data", event.data)
+
         if(exchangeTitle && sortType) {
             updatedFundingsData = sortDataByFunding(updatedFundingsData, exchangeTitle, sortType);
         }

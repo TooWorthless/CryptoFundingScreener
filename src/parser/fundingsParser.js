@@ -49,48 +49,6 @@ class FundingsParser {
                     console.log('err', error.message);
                 }
             },
-            'xt': async (exchange) => {
-                try {
-                    const coinsResponse = await this.getRequest(exchange.coins_link, {
-                        'instType': 'SWAP'
-                    });
-
-                    if(!coinsResponse) return;
-
-                    const symbolsObjectsList = coinsResponse.data.result.symbols;
-
-                    for(const symbolObject of symbolsObjectsList) {
-
-                        let symbolId = symbolObject.symbol.split('_');
-                        let symbolTitle = formatSymbolTitle(symbolId[0]);
-                        let symbolType = formatSymbolTitle(symbolId[1]);
-
-
-                        if(symbolType !== 'usdt') continue;
-
-                        const symbolFundingRateResponse = await this.getRequest(exchange.funding_link, {
-                            'symbol': symbolId.join('_')
-                        });
-                        
-                        if(!symbolFundingRateResponse) continue;
-
-
-                        try {
-                            const symbolFundingRateData = symbolFundingRateResponse.data.result;
-                            const symbolFundingRate = +(+symbolFundingRateData.fundingRate*100).toFixed(4);
-                            
-
-                            this.parsingMethodHandler(symbolTitle, symbolFundingRate, exchange);
-
-                        } catch (error) {
-                            console.log('error.message :>> ', error.message);
-                        }
-                        
-                    }
-                } catch (error) {
-                    console.log('err :>> ', error.message);
-                }
-            },
             'binance': async (exchange) => {
                 try {
                     const coinsResponse = await this.getRequest(exchange.coins_link);

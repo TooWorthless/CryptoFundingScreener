@@ -5,11 +5,6 @@
         "funding_link": "https://www.okx.com/api/v5/public/funding-rate"
     },
     {
-        "title": "xt",
-        "coins_link": "https://fapi.xt.com/future/market/v3/public/symbol/list",
-        "funding_link": "https://fapi.xt.com/future/market/v1/public/q/funding-rate"
-    },
-    {
         "title": "binance",
         "coins_link": "https://fapi.binance.com/fapi/v1/exchangeInfo",
         "funding_link": "https://fapi.binance.com/fapi/v1/premiumIndex"
